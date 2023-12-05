@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='maskfill',  # Package name
-    version='0.1.0',  # Initial version
+    version='1.0',  # Initial version
     author='Pieter van Dokkum',  # Replace with your name
-    author_email='pieter.vandokkum@example.com',  # Replace with your email
+    author_email='pieter.vandokkum@@yale.edu',  # Replace with your email
     description='A Python package for image mask filling',  # Replace with your description
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
