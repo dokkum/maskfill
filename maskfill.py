@@ -3,6 +3,8 @@ import argparse
 from astropy.io import fits
 
 
+__version__ = "1.0"
+
 def nan_filter(image, size, orgimage, operator):
     """
     Apply mean or median filter to replace NaN values in an image
