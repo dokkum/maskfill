@@ -10,7 +10,6 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/dokkum/maskfill',  # Replace with the URL to your repo
     download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.0.tar.gz',
-    keywords = ['tag1', 'tag2'],
     packages=find_packages(),
     install_requires=[
         'numpy',
