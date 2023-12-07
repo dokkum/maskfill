@@ -86,7 +86,7 @@ def maskfill(input : Union[np.ndarray,str],
     # Iterate until all masked pixels are replaced
     counter = 1
     im_masked = np.copy(im_masked_initial)
-    while np.isnan(im_masked).any():
+    while np.isnan(im_masked).any():
         if verbose:
             print("Replacing masked pixels, iteration {}".format(counter))
         # Apply mean or median filter based on the specified operator
