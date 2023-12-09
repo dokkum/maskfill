@@ -26,3 +26,5 @@ dependencies = [
     "numpy",
     "astropy"
 ]
+[project.scripts]
+maskfill = "maskfill.maskfill:cli"
