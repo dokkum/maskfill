@@ -4,10 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "maskfill"
-version = "1.0"
+version = "0.1.0"
 description = "A Python package for image mask filling"
 authors = [
-    { name = "Pieter van Dokkum", email = "pieter.vandokkum@yale.edu" }
+    { name = "Pieter van Dokkum", email = "pieter.vandokkum@yale.edu"},
+    { name = "Imad Pasha", email = "imad.pasha@yale.edu"}
 ]
 license = { file = "LICENSE" }
 readme = "README.md"
