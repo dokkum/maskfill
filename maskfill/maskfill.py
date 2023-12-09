@@ -98,7 +98,7 @@ def maskfill(input_image : Union[str,np.ndarray],
     else:
         raise ValueError('Operator must be mean or median.')
 
-    if isinstance(input, str):
+    if isinstance(input_image, str):
         im = fits.getdata(input_image, ext)
     else:
         im = input_image
