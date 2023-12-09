@@ -117,12 +117,12 @@ def maskfill(input_image : Union[str,np.ndarray],
     while np.isnan(output).any():
         if verbose:
             print(f'On iteration {counter} | Masked pixels remaining: {np.isnan(output).sum()}')
-        output = process_masked_pixels(output=output, pad_width=pad_width,operator_func=operator_func)
-        counter += 1
+        output = process_masked_pixels(input_image=output, pad_width=pad_width,operator_func=operator_func)
         if writesteps:
             fits.writeto(f"_iter_{counter}.fits", output, overwrite=True)
             if verbose:
                 print(f'Intermediate fits written to: {f"_iter_{counter}.fits"}.')
+        counter += 1
 
     if verbose:
         print('Pixel replacement complete.')
@@ -130,7 +130,7 @@ def maskfill(input_image : Union[str,np.ndarray],
     if smooth:
         if verbose:
             print('Boxcar smoothing the masked areas.')
-        smoothed_output = process_masked_pixels(output,pad_width=pad_width,mask=mask,operator_func=np.nanmean)
+        smoothed_output = process_masked_pixels(input_image=output,pad_width=pad_width,mask=mask,operator_func=np.nanmean)
         if verbose:
             print('Smoothing complete.')
 
@@ -172,8 +172,9 @@ def cli():
     ext = args.extension if args.extension else 0 
     size = args.size if args.size and args.size>2 else 3
     operator = args.operator if args.operator and args.operator in ['mean','median'] else 'median'
-    nosmooth = args.nosmooth if args.nosmooth else False 
-    smooth = bool(~nosmooth)
+    #nosmooth = args.nosmooth if args.nosmooth else False 
+    smooth = not args.nosmooth
+    print(smooth)
     writesteps = args.writesteps if args.writesteps else False
     output_file = args.output
     verbose = args.verbose if args.verbose else False
