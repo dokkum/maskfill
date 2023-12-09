@@ -4,9 +4,9 @@ from astropy.io import fits
 import argparse 
 
 def process_masked_pixels(input_image : np.ndarray,
-                        pad_width:int, 
-                        mask:np.ndarray=None, 
-                        operator_func: Callable[[np.ndarray|float], np.ndarray|float] = np.nanmean):
+                        pad_width : int, 
+                        mask : np.ndarray = None, 
+                        operator_func : Callable[[np.ndarray|float], np.ndarray|float] = np.nanmean):
     """Helper function to process masked pixels in the output image.
     Returns the updated output array.
 
