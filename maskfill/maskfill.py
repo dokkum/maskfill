@@ -2,6 +2,39 @@ from typing import Union, Callable
 import numpy as np 
 from astropy.io import fits 
 import argparse 
+from scipy.signal import convolve2d
+
+
+def find_nan_indices(arr:np.ndarray,window_size:int=3):
+    """Find all NaN indices in an array which have at least 1 non-NaN neighbor in the given window
+
+    Parameters
+    ----------
+    arr : np.ndarray
+        array to find NaNs with >0 non-NaN neighbors in 
+    window_size : int, optional
+        window size (3x3 means the eight pixels around a given pixel), by default 3
+
+    Returns
+    -------
+    np.ndarray
+        all indices where the condition of a NaN with >0 non-NaN neighbor is True
+    """
+    # Create a mask of NaN values
+    nan_mask = np.isnan(arr)
+
+    # Define the convolution kernel to count non-NaN neighbors
+    kernel = np.ones((window_size, window_size), dtype=int)
+    kernel[window_size // 2, window_size // 2] = 0  # Ignore the center pixel
+
+    # Count the non-NaN neighbors for each element
+    non_nan_neighbors = convolve2d(~nan_mask, kernel, mode='same', boundary='fill', fillvalue=0)
+
+    # Find indices where the element is NaN and has at least one non-NaN neighbor
+    result_indices = np.argwhere(nan_mask & (non_nan_neighbors > 0))
+
+    return result_indices
+
 
 def process_masked_pixels(input_image : np.ndarray,
                         pad_width : int, 
@@ -29,18 +62,17 @@ def process_masked_pixels(input_image : np.ndarray,
     """
     padded_output = np.pad(input_image, pad_width, 'constant', constant_values=np.nan)
     if mask is not None:
-        ind_masked = np.where(mask)
+        ind_masked = np.column_stack(np.where(mask)) 
     else:
-        ind_masked = np.where(np.isnan(input_image))
-    ind_masked_flat = np.ravel_multi_index(ind_masked, dims=input_image.shape)
-
-    for i in ind_masked_flat:
-        y, x = np.unravel_index(i, input_image.shape)
+        ind_masked = find_nan_indices(input_image)
+    for i in ind_masked:
+        y = i[0] 
+        x =i[1]
         x_padded, y_padded = x + pad_width, y + pad_width
         local_window = padded_output[y_padded-pad_width:y_padded+pad_width+1, 
                                     x_padded-pad_width:x_padded+pad_width+1]
-        if not np.isnan(local_window).all():
-            input_image[y, x] = operator_func(local_window)
+        #if not np.isnan(local_window).all():
+        input_image[y, x] = operator_func(local_window)
 
     return input_image
 
