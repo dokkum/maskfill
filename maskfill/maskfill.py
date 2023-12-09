@@ -32,7 +32,7 @@ def process_masked_pixels(input_image : np.ndarray,
         ind_masked = np.where(mask)
     else:
         ind_masked = np.where(np.isnan(input_image))
-    ind_masked_flat = np.ravel_multi_index(ind_masked, dims=output.shape)
+    ind_masked_flat = np.ravel_multi_index(ind_masked, dims=input_image.shape)
 
     for i in ind_masked_flat:
         y, x = np.unravel_index(i, input_image.shape)
