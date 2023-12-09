@@ -151,7 +151,7 @@ def maskfill(input_image : Union[str,np.ndarray],
         if verbose:
             print(f'Output written to: {output_file}')
     if smooth:
-        return smoothed_output, output 
+        return smoothed_output, output1
     else:
         return output1,None
 
