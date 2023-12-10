@@ -28,5 +28,7 @@ dependencies = [
     "astropy",
     "scipy"
 ]
+[project.optional-dependencies]
+testing = ["pytest"]
 [project.scripts]
 maskfill = "maskfill.maskfill:cli"
