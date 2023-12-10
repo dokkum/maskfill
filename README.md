@@ -85,8 +85,8 @@ which would not only print to screen the iteration progress but write both inter
 
 The `results` output by the function are a tuple containing either: 
 
-1. (output_smoothed,output) if the smoothing step is enabled, or 
-2. (output, None) if the smoothing step is disabled. 
+1. `(output_smoothed,output)` if the smoothing step is enabled, or 
+2. `(output, None)` if the smoothing step is disabled. 
 
 Thus to access or plot the smoothed image from a default run, we would either run `results[0]`, or run with 
 
