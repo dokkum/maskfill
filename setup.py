@@ -9,7 +9,7 @@ setup(
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/dokkum/maskfill',  
-    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.1.0.tar.gz',
+    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.1.0-beta.tar.gz',
     packages=find_packages(),
     install_requires=[
         'numpy',
