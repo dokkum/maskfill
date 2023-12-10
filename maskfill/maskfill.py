@@ -131,10 +131,14 @@ def maskfill(input_image : Union[str,np.ndarray],
         raise ValueError('Operator must be mean or median.')
 
     if isinstance(input_image, str):
+        if not input_image.endswith('.fits'):
+            input_image+='.fits'
         im = fits.getdata(input_image, ext)
     else:
         im = input_image
     if isinstance(mask, str):
+        if not mask.endswith('.fits'):
+            mask+='.fits'
         mask = fits.getdata(mask, ext)
         mask = np.array(mask, dtype=bool)
     else:
