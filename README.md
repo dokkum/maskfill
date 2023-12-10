@@ -19,7 +19,7 @@ or the latest version from github can be retrieved via
 ```
 git clone https://github.com/dokkum/maskfill.git
 cd maskfill 
-pip intall . # or pip install -e .
+pip install . # or pip install -e .
 ```
 Its dependencies are only `numpy`, `scipy`, `astropy` (for fits handling), and Python>=3.6 for type annotations. If you wish, you can create a minimal working environment for this code via `conda` or `mamba`, e.g.,  
 ```
