@@ -58,6 +58,7 @@ def process_masked_pixels(input_image : np.ndarray,
         Image with all masked or NaN pixels that have neighboring non-NaN values replaced by the operator func applied to those neighbors.
     """
     padded_output = np.pad(input_image, pad_width, 'constant', constant_values=np.nan)
+    #if mask provided, index list generated from mask. Else, index list is any NaN in input image.
     if mask is not None:
         ind_masked = np.column_stack(np.where(mask)) 
     else:
@@ -122,10 +123,6 @@ def maskfill(input_image : Union[str,np.ndarray],
         raise ValueError('Operator must be mean or median.')
     if size % 2 == 0:
         raise ValueError("Window_size must be odd")
-    if np.isnan(mask).any():
-        if verbose:
-            print('Mask contained NaNs! NaNs in mask are ignored (only pixels with value 1 are infilled).')
-        mask[np.isnan(mask)] = 0
     if isinstance(input_image, str):
         if not input_image.endswith('.fits'):
             input_image+='.fits'
@@ -139,7 +136,10 @@ def maskfill(input_image : Union[str,np.ndarray],
         mask = np.array(mask, dtype=bool)
     else:
         mask = np.array(mask, dtype=bool)
-
+    if np.isnan(mask).any():
+        if verbose:
+            print('Mask contained NaNs! NaNs in mask are ignored (only pixels with value 1 are infilled).')
+        mask[np.isnan(mask)] = 0
     output = np.copy(im)
     output[mask] = np.nan
     pad_width = size // 2

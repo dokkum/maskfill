@@ -1,7 +1,7 @@
 
 from maskfill import find_nan_indices, process_masked_pixels, maskfill 
 import numpy as np 
-
+from astropy.io import fits 
 # Test Suite for the maskfill code to ensure behavior is as expected. 
 
 
@@ -211,3 +211,16 @@ def test_proccess_4():
 
     out = process_masked_pixels(input_array,pad_width=1,mask=mask,operator_func=np.nanmean)
     np.testing.assert_equal(out,expected)
+
+def test_maskfill_1():
+    """ 
+    Test that maskfill's output for the smoothed and not smoothed versions matches 
+    an output from the original implementation
+    """
+    orig = fits.getdata('default.fits')
+    new_sm,new = maskfill(  '../example_synthetic/synth_im.fits',
+                            '../example_synthetic/synth_mask.fits')
+    
+    np.testing.assert_equal(orig,new_sm)
+
+
