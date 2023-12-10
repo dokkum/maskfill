@@ -41,7 +41,13 @@ The simplest call is something like
 ```
 maskfill im.fits mask.fits out.fits
 ```
-in which we provide the input image, mask image, and name of the output file (if the `.fits` is omitted, `maskfill` will add it). There are also several optional arguments and flags. 
+
+or
+```
+maskfill im mask out #file extension assumed to be .fits
+```
+
+in which we provide the input image, mask image, and name of the output file (if the `.fits` is omitted, `maskfill` will add it, though if your files have alternate extensions like `.fit` you should specify the full name). There are also several optional arguments and flags. 
 
 - `-e X` or `--extension X`: if the image and mask are not in the 0th fits extension, specify it here 
 - `-s X` or `--size X`: if you want a larger window kernel than the minimum 3x3, specify it here (faster, but less accurate results)
