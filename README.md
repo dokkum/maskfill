@@ -1,8 +1,8 @@
 # maskfill
 
-Fill in masked values in an image
+Fill in masked values in an image.
 
-Method description is in van Dokkum (2023) (PASP)
+Method description is in van Dokkum et al. (2023) (PASP).
 
 Examples in
  example_synthetic/
