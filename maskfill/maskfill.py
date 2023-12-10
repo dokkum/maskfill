@@ -94,10 +94,11 @@ def maskfill(input_image : Union[str,np.ndarray],
         input image; either a path to a `.fits` file or a numpy ndarray
     mask : Union[str,np.ndarray]
         mask image; either a path to a `.fits` file or a numpy ndarray [0 = good, 1 = bad/fill location]
+        Note that any NaN values in the mask file will be ignored (i.e., treated as 0). 
     ext : int, optional
         fits extension in input and mask where data are stored, by default 0
     size : int, optional
-        size for the filter to use --- a size of three implies the 8 pixels surrounding 1 pixel are considered, by default 3
+        size for the filter to use (must be odd) --- a size of three implies the 8 pixels surrounding 1 pixel are considered, by default 3
     operator : str, optional
         fill operator either 'median' or 'mean', by default 'median'
     smooth : bool, optional
@@ -129,7 +130,12 @@ def maskfill(input_image : Union[str,np.ndarray],
         operator_func = np.nanmean 
     else:
         raise ValueError('Operator must be mean or median.')
-
+    if size % 2 == 0:
+        raise ValueError("Window_size must be odd")
+    if np.isnan(mask).any():
+        if verbose:
+            print('Mask contained NaNs! NaNs in mask are ignored (only pixels with value 1 are infilled).')
+        mask[np.isnan(mask)] = 0
     if isinstance(input_image, str):
         if not input_image.endswith('.fits'):
             input_image+='.fits'
