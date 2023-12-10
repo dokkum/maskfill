@@ -114,22 +114,22 @@ def test_nanfinder_6():
                             [np.nan,np.nan,np.nan,np.nan,np.nan,np.nan],
                             [np.nan,np.nan,np.nan,np.nan,1     ,np.nan],
                             [np.nan,np.nan,np.nan,np.nan,np.nan,np.nan]])
-    expected = np.array([[0,0],
-                         [0,1],
-                         [0,2],
-                         [1,0],
-                         [1,2],
-                         [2,0],
-                         [2,1],
-                         [2,2],
-                         [2,3],
-                         [2,4],
-                         [2,5],
-                         [3,3],
-                         [3,5],
-                         [4,3],
-                         [4,4],
-                         [4,5]])
+    expected = np.array(   [[0,0],
+                            [0,1],
+                            [0,2],
+                            [1,0],
+                            [1,2],
+                            [2,0],
+                            [2,1],
+                            [2,2],
+                            [2,3],
+                            [2,4],
+                            [2,5],
+                            [3,3],
+                            [3,5],
+                            [4,3],
+                            [4,4],
+                            [4,5]])
     out_ind = find_nan_indices(input_array)
     np.testing.assert_equal(out_ind,expected)
 
