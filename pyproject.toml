@@ -25,7 +25,8 @@ classifiers = [
 ]
 dependencies = [
     "numpy",
-    "astropy"
+    "astropy",
+    "scipy"
 ]
 [project.scripts]
 maskfill = "maskfill.maskfill:cli"

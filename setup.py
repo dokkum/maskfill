@@ -1,19 +1,20 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='maskfill',  # Package name
-    version='0.2.0',  # Initial version
-    author='Pieter van Dokkum & Imad Pasha',  # Replace with your name
-    author_email='pieter.vandokkum@yale.edu',  # Replace with your email
-    description='A Python package for image mask filling',  # Replace with your description
+    name='maskfill',  
+    version='0.2.0',  
+    author='Pieter van Dokkum & Imad Pasha',  
+    author_email='pieter.vandokkum@yale.edu',  
+    description='A Python package for image mask filling', 
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/dokkum/maskfill',  # Replace with the URL to your repo
-    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.0.tar.gz',
+    url='https://github.com/dokkum/maskfill',  
+    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v0.2.0.tar.gz',
     packages=find_packages(),
     install_requires=[
         'numpy',
-        'astropy',  # Add other dependencies as needed
+        'astropy',  
+        'scipy'
     ],
     entry_points={
         'console_scripts': [
@@ -21,8 +22,6 @@ setup(
         ],
     },
     classifiers=[
-        # Intended audience, project status, license, supported Python versions, etc.
-        # Example:
         'Development Status :: 4 - Beta',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
