@@ -20,19 +20,16 @@ def find_nan_indices(arr:np.ndarray,window_size:int=3):
     np.ndarray
         all indices where the condition of a NaN with >0 non-NaN neighbor is True
     """
-    # Create a mask of NaN values
+    if window_size % 2 == 0:
+        raise ValueError("Window_size must be odd")
     nan_mask = np.isnan(arr)
-
     # Define the convolution kernel to count non-NaN neighbors
     kernel = np.ones((window_size, window_size), dtype=int)
     kernel[window_size // 2, window_size // 2] = 0  # Ignore the center pixel
-
     # Count the non-NaN neighbors for each element
     non_nan_neighbors = convolve2d(~nan_mask, kernel, mode='same', boundary='fill', fillvalue=0)
-
     # Find indices where the element is NaN and has at least one non-NaN neighbor
     result_indices = np.argwhere(nan_mask & (non_nan_neighbors > 0))
-
     return result_indices
 
 
@@ -71,9 +68,7 @@ def process_masked_pixels(input_image : np.ndarray,
         x_padded, y_padded = x + pad_width, y + pad_width
         local_window = padded_output[y_padded-pad_width:y_padded+pad_width+1, 
                                     x_padded-pad_width:x_padded+pad_width+1]
-        #if not np.isnan(local_window).all():
         input_image[y, x] = operator_func(local_window)
-
     return input_image
 
 def maskfill(input_image : Union[str,np.ndarray], 
@@ -118,11 +113,6 @@ def maskfill(input_image : Union[str,np.ndarray],
         One can ignore the second output by calling `smoothed_output, _ = maskfill(...)`
         Similarly, if an output filename is provided, the 0th extension will have the output image smoothed if smoothing was
         requested, or unsmoothed if not. If smoothing was requested, the unsmoothed version will be stored in the 1st extension.
-
-    Raises
-    ------
-    ValueError
-        _description_
     """
     if operator == 'median':
         operator_func = np.nanmedian 
