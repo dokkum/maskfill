@@ -1,11 +1,10 @@
-from typing import Union, Callable 
 import numpy as np 
 from astropy.io import fits 
 import argparse 
 from scipy.signal import convolve2d
 
 
-def find_nan_indices(arr:np.ndarray,window_size:int=3):
+def find_nan_indices(arr,window_size=3):
     """Find all NaN indices in an array which have at least 1 non-NaN neighbor in the given window
 
     Parameters
@@ -33,10 +32,10 @@ def find_nan_indices(arr:np.ndarray,window_size:int=3):
     return result_indices
 
 
-def process_masked_pixels(input_image : np.ndarray,
-                        pad_width : int, 
-                        mask : np.ndarray = None, 
-                        operator_func : Callable[[np.ndarray|float], np.ndarray|float] = np.nanmean):
+def process_masked_pixels(input_image,
+                        pad_width, 
+                        mask = None, 
+                        operator_func = np.nanmean):
     """Helper function to process masked pixels in the output image.
     Returns the updated output array.
 
@@ -72,15 +71,15 @@ def process_masked_pixels(input_image : np.ndarray,
         input_image[y, x] = operator_func(local_window)
     return input_image
 
-def maskfill(input_image : Union[str,np.ndarray], 
-            mask : Union[str,np.ndarray], 
-            ext : int = 0, 
-            size : int = 3, 
-            operator : str = 'median', 
-            smooth : bool = True, 
-            writesteps : bool = False, 
-            output_file : str = None, 
-            verbose : bool = False):
+def maskfill(input_image, 
+            mask, 
+            ext = 0, 
+            size = 3, 
+            operator = 'median', 
+            smooth = True, 
+            writesteps = False, 
+            output_file = None, 
+            verbose = False):
     """Maskfill function used to smoothly iteratively fill masks in images. 
     See van Dokkum et al. 2023 (PASP) for details.
 
@@ -148,12 +147,13 @@ def maskfill(input_image : Union[str,np.ndarray],
         print('Starting Masked Pixel Fill.')
     while np.isnan(output).any():
         if verbose:
-            print(f'On iteration {counter} | Masked pixels remaining: {np.isnan(output).sum()}')
+            print('On iteration {} | Masked pixels remaining: {}'.format(counter,np.isnan(output).sum()))
         output = process_masked_pixels(input_image=output, pad_width=pad_width,operator_func=operator_func)
         if writesteps:
-            fits.writeto(f"_iter_{counter}.fits", output, overwrite=True)
+            fits.writeto("_iter_{}.fits".format(counter), output, overwrite=True)
             if verbose:
-                print(f'Intermediate fits written to: {f"_iter_{counter}.fits"}.')
+                pp = 'Intermediate fits written to: _iter_' + str(counter) + '.fits' 
+                print(pp)
         counter += 1
 
     if verbose:
@@ -181,7 +181,7 @@ def maskfill(input_image : Union[str,np.ndarray],
             hdu = fits.PrimaryHDU(output1)
             hdu.writeto(output_file,overwrite=True)
         if verbose:
-            print(f'Output written to: {output_file}')
+            print('Output written to: {}'.format(output_file))
     if smooth:
         return smoothed_output, output1
     else:
