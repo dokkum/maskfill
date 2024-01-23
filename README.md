@@ -2,7 +2,7 @@
 
 Fill in masked values in an image.
 
-Method description is in van Dokkum et al. (2023) (PASP).
+The method description can be found in van Dokkum & Pasha (2024) (PASP).
 
 Examples in
  example_synthetic/
@@ -21,11 +21,22 @@ git clone https://github.com/dokkum/maskfill.git
 cd maskfill 
 pip install . # or pip install -e .
 ```
-Its dependencies are only `numpy`, `scipy`, `astropy` (for fits handling), and Python>=3.6 for type annotations. If you wish, you can create a minimal working environment for this code via `conda` or `mamba`, e.g.,  
+Its dependencies are only `numpy`, `scipy`, `astropy` (for fits handling), and `Python>=3.6` for type annotation an f-fstrings. If you wish, you can create a minimal working environment for this code via `conda` or `mamba`, e.g.,  
 ```
 mamba create -n maskfill python=3.10 numpy scipy astropy
-activate maskfill
+mamba activate maskfill
 ```
+ ### Legacy 
+If you have a version of Python<3.6, we have tested maskfill as far back as Python 2.7 and it appears to work for the current version. 
+To install a Python 2.7 - Python 3.5.9 compatible version (the only difference is type annotations and print statement formatting), checkout the branch:
+
+```
+git clone --branch python<3.6 --single-branch https://github.com/dokkum/maskfill.git
+cd maskfill 
+pip install . # or pip install -e .
+```
+(assuming you have the three dependencies in a working configuration).
+
 
 ## Usage 
 
@@ -47,7 +58,7 @@ or
 maskfill im mask out #file extension assumed to be .fits
 ```
 
-in which we provide the input image, mask image, and name of the output file (if the `.fits` is omitted, `maskfill` will add it, though if your files have alternate extensions like `.fit` you should specify the full name). There are also several optional arguments and flags. 
+in which you provide the input image, mask image, and name of the output file (if the `.fits` is omitted, `maskfill` will add it, though if your files have alternate extensions like `.fit` you should specify the full name). There are also several optional arguments and flags. 
 
 - `-e X` or `--extension X`: if the image and mask are not in the 0th fits extension, specify it here 
 - `-s X` or `--size X`: if you want a larger window kernel than the minimum 3x3, specify it here (faster, but less accurate results)
@@ -68,14 +79,14 @@ The function supports all the same features as the CLI. We can provide either fi
 ```python
 from astropy.io import fits 
 
-im = fits.getdata('im.fits')
-mask = fits.getdata('mask.fits')
+im = fits.getdata('/path/to/im.fits')
+mask = fits.getdata('/path/to/mask.fits')
 
 result = maskfill(im,mask)
 # or, equivalently, 
-result = maskfill('im.fits','mask.fits')
+result = maskfill('/path/to/im.fits','/path/to/mask.fits')
 ```
-When providing filepaths, the `ext` argument allows non 0th extensions to be queried. Like the CLI, all other arguments are optional, but unlike the CLI, the `output_file` argument is also optional --- `maskfill` returns the filled image(s) as arrays directly, but a fits file can be written if desired by providing a filename (same goes for the intermediate steps). 
+When providing filepaths, the `ext` argument allows non 0th extensions to be queried. Like the CLI, all other arguments are optional, but unlike the CLI, the `output_file` argument is also optional --- `maskfill` returns the filled image(s) as arrays directly, but a `fits`` file can be written if desired by providing a filename (same goes for the intermediate steps). 
 
 Thus, a "maximally verbose" run might look like 
 ```python
@@ -92,4 +103,27 @@ Thus to access or plot the smoothed image from a default run, we would either ru
 
 ```python
 results,_ = maskfill(im,mask)
+```
+
+## Citing Maskfill 
+
+If you find `maskfill` useful in your research or image handlings, please cite the code: 
+
+```
+@ARTICLE{2023arXiv231203064V,
+       author = {{van Dokkum}, Pieter},
+        title = "{A robust method for filling in masked data in astronomical images}",
+      journal = {arXiv e-prints},
+     keywords = {Astrophysics - Instrumentation and Methods for Astrophysics, Astrophysics - Astrophysics of Galaxies},
+         year = 2023,
+        month = dec,
+          eid = {arXiv:2312.03064},
+        pages = {arXiv:2312.03064},
+          doi = {10.48550/arXiv.2312.03064},
+archivePrefix = {arXiv},
+       eprint = {2312.03064},
+ primaryClass = {astro-ph.IM},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2023arXiv231203064V},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 ```
