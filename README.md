@@ -1,5 +1,8 @@
 # maskfill
 
+[![Documentation Status](https://readthedocs.org/projects/maskfill/badge/?version=latest)](https://maskfill.readthedocs.io/en/latest/?badge=latest)
+
+
 Fill in masked values in an image.
 
 The method description can be found in van Dokkum & Pasha (2024) (PASP).

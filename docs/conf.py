@@ -31,7 +31,7 @@ copyright = '2024, Pieter van Dokkum & Imad Pasha'
 author = 'Pieter van Dokkum & Imad Pasha'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.2'
+release = '1.1.1'
 html_theme = "sphinx_rtd_theme"
 ## myst_nb default settings
 

@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='maskfill',  
-    version='1.1.2',  
+    version='1.1.1',  
     author='Pieter van Dokkum & Imad Pasha',  
     author_email='pieter.vandokkum@yale.edu',  
     description='A Python package for image mask filling', 
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/dokkum/maskfill',  
-    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.1.2.tar.gz',
+    download_url = 'https://github.com/dokkum/maskfill/archive/refs/tags/v1.1.1.tar.gz',
     packages=find_packages(),
     install_requires=[
         'numpy',
