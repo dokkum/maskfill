@@ -1,7 +1,7 @@
 numpy
 scipy 
 astropy
-matplotlib 
+matplotlib>=3.7.0
 sphinx 
 myst-nb
 sphinx-autodoc2
