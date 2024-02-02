@@ -6,3 +6,4 @@ sphinx
 myst-nb
 sphinx-autodoc2
 sphinx_rtd_theme
+maskfill @ git+https://github.com/dokkum/maskfill@main
