@@ -1,5 +1,7 @@
 # maskfill
 
+![GitHub Latest Release)](https://img.shields.io/github/v/release/dokkum/maskfill?logo=github)
+[![PyPI version](https://badge.fury.io/py/maskfill.svg)](https://badge.fury.io/py/maskfill)
 [![Documentation Status](https://readthedocs.org/projects/maskfill/badge/?version=latest)](https://maskfill.readthedocs.io/en/latest/?badge=latest)
 
 
