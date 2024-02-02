@@ -52,7 +52,7 @@ You can learn more about usage in the Python Usage and CLI usage pages.
 
 ```{toctree}
 :maxdepth: 2
-notebook1
+python-usage
 cli
 apidocs/index
 ```
