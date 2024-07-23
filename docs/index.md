@@ -55,6 +55,31 @@ will run `maskfill` and save the results to a fits file.
 
 You can learn more about usage in the Python Usage and CLI usage pages. 
 
+## Citing Maskfill 
+
+If you find `maskfill` useful in your research or image handlings, please cite the code: 
+
+```
+@ARTICLE{vanDokkum:2024,
+       author = {{van Dokkum}, Pieter and {Pasha}, Imad},
+        title = "{A Robust and Simple Method for Filling in Masked Data in Astronomical Images}",
+      journal = {\pasp},
+     keywords = {Direct imaging, Astronomical techniques, Astronomy data reduction, Astronomy data analysis, 387, 1684, 1861, 1858, Astrophysics - Instrumentation and Methods for Astrophysics, Astrophysics - Astrophysics of Galaxies},
+         year = 2024,
+        month = mar,
+       volume = {136},
+       number = {3},
+          eid = {034503},
+        pages = {034503},
+          doi = {10.1088/1538-3873/ad2866},
+archivePrefix = {arXiv},
+       eprint = {2312.03064},
+ primaryClass = {astro-ph.IM},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024PASP..136c4503V},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+```
+
 ```{toctree}
 :maxdepth: 2
 python-usage
