@@ -217,7 +217,7 @@ def test_maskfill_1():
     Test that maskfill's output for the smoothed and not smoothed versions matches 
     an output from the original implementation
     """
-    orig = fits.getdata('default.fits')
+    orig = fits.getdata('./default.fits')
     new_sm,new = maskfill(  '../example_synthetic/synth_im.fits',
                             '../example_synthetic/synth_mask.fits')
     
